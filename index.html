@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apex Bravery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="m-2">
+    <div id="result"></div>
+    <div>
+        <form id="mainForm" action="." method="get">
+            <div id="playerConfigs"></div>
+            <div id="globalConfigs" class="my-4">
+                <div class="flex justify-start gap-4">
+                    <span>Weapon Mode:</span>
+                    <label class="inline-flex gap-2">
+                        <input type="radio" name="gwm" value="random" />
+                        Random
+                    </label>
+                    <label class="inline-flex gap-2">
+                        <input type="radio" name="gwm" value="player" />
+                        Unique per player
+                    </label>
+                    <label class="inline-flex gap-2">
+                        <input type="radio" name="gwm" value="global" />
+                        Unique per team
+                    </label>
+                </div>
+            </div>
+            <button class="border border-black rounded-lg px-4 py-2">Roll</button>
+            <a class="ml-4" href=".">Reset</a>
+        </form>
+    </div>
+</div>
+<div id="templates">
+    <template class="result-frame">
+        <div class="inline-grid gap-x-4 grid-cols-1 sm:grid-cols-2 m-2 mr-8">
+            <div>Name</div>
+            <div class="name underline font-bold sm:text-right"></div>
+            <div>Legend</div>
+            <div class="legend font-bold sm:text-right"></div>
+            <div>Weapon 1</div>
+            <div class="weapon1 font-bold sm:text-right"></div>
+            <div>Weapon 2</div>
+            <div class="weapon2 font-bold sm:text-right"></div>
+        </div>
+    </template>
+    <template class="player-config">
+        <div class="mb-2 p-2 border border-black">
+            <label class="inline-flex gap-2">
+                <span>Name:</span>
+                <input name="name" class="border border-black" />
+            </label>
+            <div class="legends flex flex-wrap gap-x-4"></div>
+        </div>
+    </template>
+    <template class="checkbox-input">
+        <label class="inline-flex gap-2">
+            <input type="checkbox" value="x" />
+            <div class="label"></div>
+        </label>
+    </template>
+</div>
+<script src="./index.js"></script>
+</body>
+</html>
