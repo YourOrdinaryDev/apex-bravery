@@ -11,7 +11,7 @@
     <div>
         <form id="mainForm" action="." method="get">
             <div id="playerConfigs"></div>
-            <div id="globalConfigs" class="my-4">
+            <div id="globalConfigs" class="my-8 flex flex-col gap-2">
                 <div class="flex justify-start gap-4">
                     <span>Weapon Mode:</span>
                     <label class="inline-flex gap-2">
@@ -25,6 +25,13 @@
                     <label class="inline-flex gap-2">
                         <input type="radio" name="gwm" value="global" />
                         Unique per team
+                    </label>
+                </div>
+                <div class="flex justify-start gap-4">
+                    <span>Additional Weapon Configs:</span>
+                    <label class="inline-flex gap-2">
+                        <input type="checkbox" name="cpw" value="x" />
+                        Include Care Package Weapons
                     </label>
                 </div>
             </div>

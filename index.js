@@ -6,13 +6,16 @@ const legends = [
     "Caustic", "Wattson", "Rampart", "Catalyst",
 ]
 const weapons = [
-    "Havoc", "Flatline", "Hemlok", "R-301", "Nemesis",
+    "Havoc", "Flatline", "R-301", "Nemesis",
     "Aalternator", "Prowler", "R-99", "Volt", "CAR",
-    "Devotion", "L-STAR", "Spitfire", "Rampage",
-    "G7", "TripleTake", "30-30", "Bocek",
-    "ChargeRifle", "Longbow", "Sentinel", "Kraber",
+    "Devotion", "Spitfire", "Rampage",
+    "G7", "TripleTake", "30-30",
+    "ChargeRifle", "Longbow", "Sentinel",
     "EVA-8", "Mastiff", "Mozambique", "Peacekeeper",
     "RE-45", "P2020", "Wingman",
+]
+const carepackageWeapons = [
+    "Kraber", "L-STAR", "Bocek", "Hemlok"
 ]
 
 const playerConfigTemplate = document.querySelector("#templates template.player-config")
@@ -70,6 +73,8 @@ function buildForm() {
     if(globalWeaponModeControl) {
         globalWeaponModeControl.checked = true
     }
+
+    document.querySelector(`input[name="cpw"]`).checked = query.get("cpw") === "x"
 }
 
 function roll() {
@@ -90,14 +95,17 @@ function roll() {
             current.querySelector(".legend").innerText = legendPick
             pickedLegends.push(legendPick)
 
+            const carepackage = query.get("cpw") === "x"
+            const effectiveWeaponPool = [...weapons, ...(carepackage ? carepackageWeapons : [])]
+
             const weaponMode = query.get("gwm") || "random"
 
-            const weaponPool1 = weapons.filter(weapon => weaponMode === "random" || weaponMode === "player" || pickedWeapons.indexOf(weapon) < 0)
+            const weaponPool1 = effectiveWeaponPool.filter(weapon => weaponMode === "random" || weaponMode === "player" || pickedWeapons.indexOf(weapon) < 0)
             const weaponPick1 = weaponPool1[Math.floor(Math.random() * weaponPool1.length)]
             current.querySelector(".weapon1").innerText = weaponPick1
             pickedWeapons.push(weaponPick1)
 
-            const weaponPool2 = weapons.filter(weapon => weaponMode === "random" || (weaponMode === "global" && pickedWeapons.indexOf(weapon) < 0) || (weaponMode === "player" && weapon !== weaponPick1))
+            const weaponPool2 = effectiveWeaponPool.filter(weapon => weaponMode === "random" || (weaponMode === "global" && pickedWeapons.indexOf(weapon) < 0) || (weaponMode === "player" && weapon !== weaponPick1))
             const weaponPick2 = weaponPool2[Math.floor(Math.random() * weaponPool2.length)]
             current.querySelector(".weapon2").innerText = weaponPick2
             pickedWeapons.push(weaponPick2)
